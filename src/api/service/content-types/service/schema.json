@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "barbers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::barber.barber",
+      "inversedBy": "services"
+    },
+    "reservations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::reservation.reservation",
+      "mappedBy": "services"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service-category.service-category",
+      "inversedBy": "services"
+    }
+  }
+}

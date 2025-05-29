@@ -1,20 +1,34 @@
-'use strict';
-
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+  register() {},
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap({ strapi }) {
+    const email = 'yunusakarakar@gmail.com'; // kendi admin email'in
+    
+    const user = await strapi.query('admin::user').findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      console.log(`❌ Kullanıcı bulunamadı: ${email}`);
+      return;
+    }
+
+    const superAdminRole = await strapi.query('admin::role').findOne({
+      where: { code: 'strapi-super-admin' },
+    });
+
+    if (!superAdminRole) {
+      console.log('❌ Super Admin rolü bulunamadı.');
+      return;
+    }
+
+    await strapi.query('admin::user').update({
+      where: { id: user.id },
+      data: {
+        roles: [superAdminRole.id],
+      },
+    });
+
+    console.log(`✅ ${email} kullanıcısına Super Admin rolü atandı!`);
+  },
 };

@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "off_datebarbers",
+  "info": {
+    "singularName": "off-datebarber",
+    "pluralName": "off-datebarbers",
+    "displayName": "offDatebarber",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "off_date": {
+      "type": "date",
+      "required": true
+    },
+    "barber": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::barber.barber",
+      "inversedBy": "off_datebarbers",
+      "required": true
+    }
+  }
+}

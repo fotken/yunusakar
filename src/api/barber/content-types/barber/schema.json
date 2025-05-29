@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "barbers",
+  "info": {
+    "singularName": "barber",
+    "pluralName": "barbers",
+    "displayName": "Barber",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "reservations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reservation.reservation",
+      "mappedBy": "barber"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::service.service",
+      "mappedBy": "barbers"
+    },
+    "off_datebarbers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::off-datebarber.off-datebarber",
+      "mappedBy": "barber"
+    }
+  }
+}

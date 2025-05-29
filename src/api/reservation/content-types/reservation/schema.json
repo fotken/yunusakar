@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reservations",
+  "info": {
+    "singularName": "reservation",
+    "pluralName": "reservations",
+    "displayName": "Reservation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "barber": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::barber.barber",
+      "inversedBy": "reservations"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time_slots": {
+      "type": "json"
+    },
+    "total_price": {
+      "type": "decimal"
+    },
+    "note": {
+      "type": "text"
+    },
+    "reservation_status": {
+      "type": "enumeration",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Done"
+      ]
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "reservations"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::service.service",
+      "inversedBy": "reservations"
+    },
+    "total_time": {
+      "type": "integer"
+    },
+    "customerName": {
+      "type": "text"
+    }
+  }
+}
