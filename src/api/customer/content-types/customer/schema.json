@@ -30,13 +30,18 @@
       "type": "email"
     },
     "userId": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "reservations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::reservation.reservation",
       "mappedBy": "customer"
+    },
+    "expoPushToken": {
+      "type": "string",
+      "required": false
     }
   }
 }
